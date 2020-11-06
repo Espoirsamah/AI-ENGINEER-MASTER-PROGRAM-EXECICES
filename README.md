@@ -1,2 +1,2 @@
-# Solve-a-Linear-Algebra-Problem
-AI Master program exercie
+# AI-ENGINEER-MASTER-PROGRAM-EXECICES
+AI Master program exercices including data science, big data, machine learning, deep learning, advanced computer vision, and many more...
