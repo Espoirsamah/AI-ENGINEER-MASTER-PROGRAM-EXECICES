@@ -1,0 +1,212 @@
+1: VIew and import the dataset
+[19]:
+
+#Import necessary libraries
+import pandas as pd
+​
+[7]:
+
+#Import the FAA (Federal Aviation Authority) dataset
+path = ("/Users/sph-it/Desktop/AI/faa_ai_prelim.csv")
+2: View and understand the dataset
+[59]:
+
+#View the dataset shape
+read_data = pd.read_csv(path)
+read_data.shape
+[59]:
+(83, 42)
+[60]:
+
+#View the first five observations
+read_data.head()
+[60]:
+UPDATED	ENTRY_DATE	EVENT_LCL_DATE	EVENT_LCL_TIME	LOC_CITY_NAME	LOC_STATE_NAME	LOC_CNTRY_NAME	RMK_TEXT	EVENT_TYPE_DESC	FSDO_DESC	...	PAX_INJ_NONE	PAX_INJ_MINOR	PAX_INJ_SERIOUS	PAX_INJ_FATAL	PAX_INJ_UNK	GRND_INJ_NONE	GRND_INJ_MINOR	GRND_INJ_SERIOUS	GRND_INJ_FATAL	GRND_INJ_UNK
+0	No	19-FEB-16	19-FEB-16	00:45:00Z	MARSHVILLE	North Carolina	NaN	AIRCRAFT CRASHED INTO TREES, THE 1 PERSON ON B...	Accident	FAA Charlotte FSDO-68	...	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN
+1	No	19-FEB-16	18-FEB-16	23:55:00Z	TAVERNIER	Florida	NaN	AIRCRAFT ON LANDING WENT OFF THE END OF THE RU...	Incident	FAA Miami FSDO-19	...	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN
+2	No	19-FEB-16	18-FEB-16	22:14:00Z	TRENTON	New Jersey	NaN	AIRCRAFT ON FINAL SUSTAINED A BIRD STRIKE, LAN...	Incident	FAA Philadelphia FSDO-17	...	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN
+3	No	19-FEB-16	18-FEB-16	17:10:00Z	ASHEVILLE	North Carolina	NaN	AIRCRAFT ON LANDING, GEAR COLLAPSED, ASHEVILLE...	Incident	FAA Charlotte FSDO-68	...	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN
+4	No	19-FEB-16	18-FEB-16	00:26:00Z	TALKEETNA	Alaska	NaN	AIRCRAFT ON LANDING, NOSE GEAR COLLAPSED, TALK...	Incident	FAA Anchorage FSDO-03	...	NaN	1.0	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN
+5 rows × 42 columns
+
+[62]:
+
+#View all the columns present in the dataset
+read_data.columns
+[62]:
+Index(['UPDATED', 'ENTRY_DATE', 'EVENT_LCL_DATE', 'EVENT_LCL_TIME',
+       'LOC_CITY_NAME', 'LOC_STATE_NAME', 'LOC_CNTRY_NAME', 'RMK_TEXT',
+       'EVENT_TYPE_DESC', 'FSDO_DESC', 'REGIST_NBR', 'FLT_NBR', 'ACFT_OPRTR',
+       'ACFT_MAKE_NAME', 'ACFT_MODEL_NAME', 'ACFT_MISSING_FLAG',
+       'ACFT_DMG_DESC', 'FLT_ACTIVITY', 'FLT_PHASE', 'FAR_PART', 'MAX_INJ_LVL',
+       'FATAL_FLAG', 'FLT_CRW_INJ_NONE', 'FLT_CRW_INJ_MINOR',
+       'FLT_CRW_INJ_SERIOUS', 'FLT_CRW_INJ_FATAL', 'FLT_CRW_INJ_UNK',
+       'CBN_CRW_INJ_NONE', 'CBN_CRW_INJ_MINOR', 'CBN_CRW_INJ_SERIOUS',
+       'CBN_CRW_INJ_FATAL', 'CBN_CRW_INJ_UNK', 'PAX_INJ_NONE', 'PAX_INJ_MINOR',
+       'PAX_INJ_SERIOUS', 'PAX_INJ_FATAL', 'PAX_INJ_UNK', 'GRND_INJ_NONE',
+       'GRND_INJ_MINOR', 'GRND_INJ_SERIOUS', 'GRND_INJ_FATAL', 'GRND_INJ_UNK'],
+      dtype='object')
+3: Extract the following attributes from the dataset:
+
+Aircraft make name
+State name
+Aircraft model name
+Text information
+Flight phase
+Event description type
+Fatal flag
+[7]:
+
+#Create a new dataframe with only the required columns
+import pandas as pd
+path = ("/Users/sph-it/Desktop/AI/faa_ai_prelim.csv")
+read_data = pd.read_csv(path)
+#read_data.head()
+extract_data = read_data.loc[:7, ['ACFT_MAKE_NAME', 'RMK_TEXT', 'LOC_STATE_NAME', 'ACFT_MODEL_NAME', 'FLT_PHASE', 'EVENT_TYPE_DESC', 'FATAL_FLAG']]
+extract_data.head(10)
+[7]:
+ACFT_MAKE_NAME	RMK_TEXT	LOC_STATE_NAME	ACFT_MODEL_NAME	FLT_PHASE	EVENT_TYPE_DESC	FATAL_FLAG
+0	BEECH	AIRCRAFT CRASHED INTO TREES, THE 1 PERSON ON B...	North Carolina	36	UNKNOWN (UNK)	Accident	Yes
+1	VANS	AIRCRAFT ON LANDING WENT OFF THE END OF THE RU...	Florida	RV7	LANDING (LDG)	Incident	NaN
+2	CESSNA	AIRCRAFT ON FINAL SUSTAINED A BIRD STRIKE, LAN...	New Jersey	172	APPROACH (APR)	Incident	NaN
+3	LANCAIR	AIRCRAFT ON LANDING, GEAR COLLAPSED, ASHEVILLE...	North Carolina	235	LANDING (LDG)	Incident	NaN
+4	CESSNA	AIRCRAFT ON LANDING, NOSE GEAR COLLAPSED, TALK...	Alaska	172	LANDING (LDG)	Incident	NaN
+5	BELL	N80918 BELL 206B ROTORCRAFT CRASHED INTO THE W...	Hawaii	206	UNKNOWN (UNK)	Accident	NaN
+6	PIPER	AIRCRAFT GEAR COLLAPSED ON LANDING, BROOKSVILL...	Florida	PA24	LANDING (LDG)	Incident	NaN
+7	CESSNA	AIRCRAFT ON LANDING GEAR COLLAPSED, WINTER HAV...	Florida	210	LANDING (LDG)	Incident	NaN
+[8]:
+
+#View the type of the object
+data_types = extract_data.dtypes
+data_types
+[8]:
+ACFT_MAKE_NAME     object
+RMK_TEXT           object
+LOC_STATE_NAME     object
+ACFT_MODEL_NAME    object
+FLT_PHASE          object
+EVENT_TYPE_DESC    object
+FATAL_FLAG         object
+dtype: object
+[9]:
+
+#Check if the dataframe contains all the required attributes
+data_contains = extract_data.all()
+data_contains
+​
+[9]:
+ACFT_MAKE_NAME     True
+RMK_TEXT           True
+LOC_STATE_NAME     True
+ACFT_MODEL_NAME    True
+FLT_PHASE          True
+EVENT_TYPE_DESC    True
+FATAL_FLAG         True
+dtype: bool
+4. Clean the dataset and replace the fatal flag NaN with “No”
+[64]:
+
+#Replace all Fatal Flag missing values with the required output
+extract_data["FATAL_FLAG"].fillna(value='no', inplace=True)
+[10]:
+
+#Verify if the missing values are replaced
+extract_data
+[10]:
+ACFT_MAKE_NAME	RMK_TEXT	LOC_STATE_NAME	ACFT_MODEL_NAME	FLT_PHASE	EVENT_TYPE_DESC	FATAL_FLAG
+0	BEECH	AIRCRAFT CRASHED INTO TREES, THE 1 PERSON ON B...	North Carolina	36	UNKNOWN (UNK)	Accident	Yes
+1	VANS	AIRCRAFT ON LANDING WENT OFF THE END OF THE RU...	Florida	RV7	LANDING (LDG)	Incident	NaN
+2	CESSNA	AIRCRAFT ON FINAL SUSTAINED A BIRD STRIKE, LAN...	New Jersey	172	APPROACH (APR)	Incident	NaN
+3	LANCAIR	AIRCRAFT ON LANDING, GEAR COLLAPSED, ASHEVILLE...	North Carolina	235	LANDING (LDG)	Incident	NaN
+4	CESSNA	AIRCRAFT ON LANDING, NOSE GEAR COLLAPSED, TALK...	Alaska	172	LANDING (LDG)	Incident	NaN
+5	BELL	N80918 BELL 206B ROTORCRAFT CRASHED INTO THE W...	Hawaii	206	UNKNOWN (UNK)	Accident	NaN
+6	PIPER	AIRCRAFT GEAR COLLAPSED ON LANDING, BROOKSVILL...	Florida	PA24	LANDING (LDG)	Incident	NaN
+7	CESSNA	AIRCRAFT ON LANDING GEAR COLLAPSED, WINTER HAV...	Florida	210	LANDING (LDG)	Incident	NaN
+[11]:
+
+#Check the number of observations
+extract_data.shape
+[11]:
+(8, 7)
+5. Remove all the observations where aircraft names are not available
+[12]:
+
+#Drop the unwanted values/observations from the dataset
+#df.dropna(subset=['name', 'born'])
+drop = extract_data.dropna(subset=['ACFT_MAKE_NAME'])
+drop
+[12]:
+ACFT_MAKE_NAME	RMK_TEXT	LOC_STATE_NAME	ACFT_MODEL_NAME	FLT_PHASE	EVENT_TYPE_DESC	FATAL_FLAG
+0	BEECH	AIRCRAFT CRASHED INTO TREES, THE 1 PERSON ON B...	North Carolina	36	UNKNOWN (UNK)	Accident	Yes
+1	VANS	AIRCRAFT ON LANDING WENT OFF THE END OF THE RU...	Florida	RV7	LANDING (LDG)	Incident	NaN
+2	CESSNA	AIRCRAFT ON FINAL SUSTAINED A BIRD STRIKE, LAN...	New Jersey	172	APPROACH (APR)	Incident	NaN
+3	LANCAIR	AIRCRAFT ON LANDING, GEAR COLLAPSED, ASHEVILLE...	North Carolina	235	LANDING (LDG)	Incident	NaN
+4	CESSNA	AIRCRAFT ON LANDING, NOSE GEAR COLLAPSED, TALK...	Alaska	172	LANDING (LDG)	Incident	NaN
+5	BELL	N80918 BELL 206B ROTORCRAFT CRASHED INTO THE W...	Hawaii	206	UNKNOWN (UNK)	Accident	NaN
+6	PIPER	AIRCRAFT GEAR COLLAPSED ON LANDING, BROOKSVILL...	Florida	PA24	LANDING (LDG)	Incident	NaN
+7	CESSNA	AIRCRAFT ON LANDING GEAR COLLAPSED, WINTER HAV...	Florida	210	LANDING (LDG)	Incident	NaN
+6. Find the aircraft types and their occurrences in the dataset
+[13]:
+
+#Check the number of observations now to compare it with the original dataset and see how many values have been dropped
+drop.size
+[13]:
+56
+[14]:
+
+#Group the dataset by aircraft name
+group_dataset = extract_data.groupby("ACFT_MAKE_NAME")
+[15]:
+
+#View the number of times each aircraft type appears in the dataset (Hint: use the size() method)
+group_dataset.size()
+[15]:
+ACFT_MAKE_NAME
+BEECH      1
+BELL       1
+CESSNA     3
+LANCAIR    1
+PIPER      1
+VANS       1
+dtype: int64
+7: Display the observations where fatal flag is “Yes”
+[16]:
+
+#Group the dataset by fatal flag
+group_by_flag = extract_data.groupby("FATAL_FLAG")
+[17]:
+
+#View the total number of fatal and non-fatal accidents
+group_by_flag.size()
+[17]:
+FATAL_FLAG
+Yes    1
+dtype: int64
+[18]:
+
+#Create a new dataframe to view only the fatal accidents (Fatal Flag values = Yes)
+accident_fatality = group_by_flag.get_group("Yes")
+accident_fatality.head(10)
+[18]:
+ACFT_MAKE_NAME	RMK_TEXT	LOC_STATE_NAME	ACFT_MODEL_NAME	FLT_PHASE	EVENT_TYPE_DESC	FATAL_FLAG
+0	BEECH	AIRCRAFT CRASHED INTO TREES, THE 1 PERSON ON B...	North Carolina	36	UNKNOWN (UNK)	Accident	Yes
+[ ]:
+
+​
+AI-DC-EXERCICE.ipynb
+dataset.py
+Lab.ipynb
+NumpyLab.py
+Assignment_01.ipynb
+Assignment_02.ipynb
+Dict.ipynb
+Pandas - Assignment 01.ipynb
+New-york.ipynb
+ML1.ipynb
+ML2.ipynb
+IBM-ATTRITION.ipynb
+IBM_Employee_Attrition_Prediction.ipynb
+ASSMT1.ipynb
+Untitled.ipynb
+ML-exe.ipynb
+NLP_Spam Detection.ipynb
