@@ -1,0 +1,87 @@
+
+[3]:
+
+"""
+#Let's import pandas library to work with, it's mostly used to analyse and manipulate data
+import pandas as pd
+from pandas import ExcelFile
+#let's define our file path, location on our pc
+olympic_path = "/Users/sph-it/Desktop/AI/Olympic.xlsx"
+#let's extract the data from the file using pandas excel fucntion
+data = pd.read_excel(olympic_path, index=False)
+data
+#column = data["Medal Tally"]
+#max_value = column.max()
+#print(max_value)
+#data.max(axis=0)
+#df = pd.DataFrame(data)
+#df
+#data
+#print the data...
+#let's find out the country that won maximum gold medal
+​
+"""
+import pandas as pd
+import numpy as np
+#let's define our file path, location on our pc
+olympic_path = "/Users/sph-it/Desktop/AI/Olympic.xlsx"
+data = pd.read_excel(olympic_path, index_col=0, usecols="D:F")
+data.head(10)
+#print("Sum: ",df["Production"].sum()) 
+#print("Mean: ",df["Production"].mean())
+#print("Maximum: ",data["Medal Tally"].max())
+#print("Minimum: ",df["Production"].min())
+​
+​
+​
+​
+​
+​
+​
+[3]:
+Unnamed: 4	Unnamed: 5
+Medal Tally		
+Gold	Silver	Bronze
+29	17	19
+38	28	22
+24	25	32
+46	28	29
+13	8	7
+7	14	17
+11	11	14
+[128]:
+
+data.max()
+[128]:
+Year    2012.0
+dtype: float64
+[84]:
+
+df_numeric = df.set_index(['Medal Tally']).select_dtypes('number')
+df_numeric.head()
+[84]:
+Year
+Medal Tally	
+Gold	NaN
+29	2012.0
+38	2012.0
+24	2012.0
+46	2012.0
+[137]:
+
+data = pd.read_excel(olympic_path, index_col=0, header=0)
+country = pd.read_excel(olympic_path, index_col=0, header=0)
+country.to_csv("Olympic.csv")
+country
+​
+[137]:
+Country Code	Year	Medal Tally	Unnamed: 4	Unnamed: 5
+Country					
+NaN	NaN	NaN	Gold	Silver	Bronze
+Great Britain	GBR	2012.0	29	17	19
+China	CHN	2012.0	38	28	22
+Russia	RUS	2012.0	24	25	32
+United States	US	2012.0	46	28	29
+Korea	KOR	2012.0	13	8	7
+Japan	JPN	2012.0	7	14	17
+Germany	GER	2012.0	11	11	14
