@@ -1,0 +1,130 @@
+1: Import the dataset
+[9]:
+
+#Import the required libraries
+import pandas as pd
+[8]:
+
+#Import the diabetes dataset
+data_path = ("/Users/sph-it/Desktop/AI/diabetes.data")
+2: Analyze the dataset
+[7]:
+
+#View the first five observations of the dataset
+read_data = pd.read_csv(data_path)
+read_data.head()
+[7]:
+6	148	72	35	0	33.6	0.627	50	1
+0	1	85	66	29	0	26.6	0.351	31	0
+1	8	183	64	0	0	23.3	0.672	32	1
+2	1	89	66	23	94	28.1	0.167	21	0
+3	0	137	40	35	168	43.1	2.288	33	1
+4	5	116	74	0	0	25.6	0.201	30	0
+3: Find the features of the dataset
+[32]:
+
+#Use the .NAMES file to view and set the features of the dataset
+features_set = ['Pregnant', 'insulin', 'bmi', 'age']
+features = read_data[features_set]
+[19]:
+
+#Use the feature names set earlier and fix it as the column headers of the dataset
+read_data = pd.read_csv(data_path, header=None,names=features_set)
+[20]:
+
+#Verify if the dataset is updated with the new headers
+read_data.head()
+​
+[20]:
+Pregnant	insulin	bmi	age
+6	148	72	35	0	33.6	0.627	50	1
+1	85	66	29	0	26.6	0.351	31	0
+8	183	64	0	0	23.3	0.672	32	1
+1	89	66	23	94	28.1	0.167	21	0
+0	137	40	35	168	43.1	2.288	33	1
+[27]:
+
+#View the number of observations and features of the dataset
+read_data.count
+[27]:
+<bound method DataFrame.count of                   Pregnant  insulin  bmi  age
+6  148 72 35 0        33.6    0.627   50    1
+1  85  66 29 0        26.6    0.351   31    0
+8  183 64 0  0        23.3    0.672   32    1
+1  89  66 23 94       28.1    0.167   21    0
+0  137 40 35 168      43.1    2.288   33    1
+...                    ...      ...  ...  ...
+10 101 76 48 180      32.9    0.171   63    0
+2  122 70 27 0        36.8    0.340   27    0
+5  121 72 23 112      26.2    0.245   30    0
+1  126 60 0  0        30.1    0.349   47    1
+   93  70 31 0        30.4    0.315   23    0
+
+[768 rows x 4 columns]>
+4: Find the response of the dataset
+[29]:
+
+#Select features from the dataset to create the model
+features = read_data[features_set]
+[33]:
+
+#Create the feature object
+features.head()
+​
+[33]:
+Pregnant	insulin	bmi	age
+6	148	72	35	0	33.6	0.627	50	1
+1	85	66	29	0	26.6	0.351	31	0
+8	183	64	0	0	23.3	0.672	32	1
+1	89	66	23	94	28.1	0.167	21	0
+0	137	40	35	168	43.1	2.288	33	1
+[35]:
+
+#Create the reponse object
+​
+[36]:
+
+#View the shape of the feature object
+features.shape
+​
+[36]:
+(768, 4)
+[12]:
+
+#View the shape of the target object
+​
+5: Use training and testing datasets to train the model
+[1]:
+
+#Split the dataset to test and train the model
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(features, random_state=1)
+from sklearn.linear_model import LogisticRegression
+logReg = LogisticRegression()
+logReg.fit(x_train, y_train)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+<ipython-input-1-9b4752d75ce3> in <module>
+      1 #Split the dataset to test and train the model
+      2 from sklearn.model_selection import train_test_split
+----> 3 x_train, x_test, y_train, y_test = train_test_split(features, random_state=1)
+      4 from sklearn.linear_model import LogisticRegression
+      5 logReg = LogisticRegression()
+
+NameError: name 'features' is not defined
+6: Create a model to predict the diabetes outcome
+[41]:
+
+# Create a logistic regression model using the training set
+#from sklearn.linear_model import LogisticRegression
+#logReg = LogisticRegression()
+#logReg.fit(x_train, y_train)
+[ ]:
+
+#Make predictions using the testing set
+​
+7: Check the accuracy of the model
+[16]:
+
+#Evaluate the accuracy of your model
+​
