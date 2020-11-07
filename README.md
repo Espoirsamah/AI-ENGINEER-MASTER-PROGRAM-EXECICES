@@ -1,2 +1,2 @@
-# AI-ENGINEER-MASTER-PROGRAM-EXECICES
+# AI-ENGINEER-MASTER-PROGRAM-REAL-INDUSTRIES-PROJECTS
 AI Master program exercices including data science, big data, machine learning, deep learning, advanced computer vision, and many more...
